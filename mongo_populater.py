@@ -30,17 +30,17 @@ def test_pop(coming_soon):
         print a.name, a.uri
 
 if __name__ == '__main__':
-    # txt_dumps = ['uri_dump.txt', 'uri_dump2.txt', 'uri_dump4.txt', 'uri_dump5.txt', 'uri_dump6.txt', 'uri_dump7.txt', 'uri_dump8.txt']
-    # master_list = set()
-    # for txt in txt_dumps:
-    #     with open(txt, 'rb') as f:
-    #         master_list.update(pickle.load(f))
-    # master_list = list(master_list)
-    # print 'now populating mongodb!'
-    # mongo_pop(master_list)
-    with open('uris_final_list.txt', 'r') as f:
-        upcoming_uris = pickle.load(f)
-    coming_soon = prep_uris(upcoming_uris)
-    # test_pop(coming_soon)
-    upcoming = set(coming_soon)
-    mongo_pop(upcoming)
+    txt_dumps = ['../pickle_jar/uri_dump9.txt', '../pickle_jar/uri_dump10.txt']
+    master_list = set()
+    for txt in txt_dumps:
+        with open(txt, 'rb') as f:
+            master_list.update(pickle.load(f))
+    master_list = list(master_list)
+    print 'now populating mongodb!'
+    mongo_pop(master_list)
+    # with open('../pickle_jar/uris_final_list2.txt', 'r') as f:
+    #     upcoming_uris = pickle.load(f)
+    # coming_soon = prep_uris(upcoming_uris)
+    # # test_pop(coming_soon)
+    # upcoming = set(coming_soon)
+    # mongo_pop(upcoming)

@@ -70,14 +70,15 @@ if __name__ == '__main__':
     # mainstream5 = ['deadmau5', 'kings+of+leon', 'drake', 'taylor+swift', 'arctic+monkeys', 'r.+kelly', 'dierks+bentley', 'britney+spears', 'fall+out+boy', 'enrique+iglesias', 'paramore', 'hozier']
     # midstream = ['spoon', 'lcd+soundsystem', 'sufjan+stevens', 'the+white+stripes', 'arcade+fire', 'erykah+badu', 'bon+iver', 'the+eagles', 'linkin+park', 'norah+jones', 'josh+groban', 'odesza']
     # midstream2 = ['tame+impala', 'chris+stapleton', 'my+morning+jacket', 'sturgill+simpson', 'ludacris', 'cake', 'beastie+boys', 'no+doubt', 'nine+inch+nails', 'disclosure', 'leon+bridges']
+    # midstream3 = ['father+john+misty', 'porter+robinson', 'lorde', 'dj+khaled', 'bastille', 'gucci+mane', 'local+natives', 'mac+demarco', 'little+dragon', 'lettuce', 'easton corbin', 'a+tribe+called+quest', 'nine+inch+nails', 'beach+house', 'tool', 'phantogram', 'saint+motel', 'flume']
     # mainstream6 = ['the+lumineers', 'the+black+eyed+peas', 'kanye+west', 'kelly+clarkson', 'justin+bieber']
-    # mainstream7 = ['the+avett+brothers', 'metallica', 'bon+jovi', 'lil+wayne', 'mstrkrft', '']
-    # res_list = []
-    # for i in mainstream6:
-    #     res_list.append(get_mainstream_uris(i))
-    # #populate individual mainstream related dbs
-    # set_of_uris = set()
-    # for i in res_list:
-    #     set_of_uris.update(mainstream_uris_db(i))
-    #     print 'artist {} associated uris collected'.format(i)
-    #     print 'total uri length', len(set_of_uris)
+    mainstream7 = ['the+avett+brothers', 'metallica', 'bon+jovi', 'lil+wayne', 'mstrkrft', 'kehlani', 'tove+lo', 'bleachers', 'marshmello', 'cage+the+elephant', 'j+cole', 'major+lazer', 'm83', 'vic+mensa', 'daughter', 'cherub', 'ariana+grande', 'eric+church', 'chris+brown']
+    res_list = []
+    for i in mainstream7:
+        res_list.append(get_mainstream_uris(i))
+    #populate individual mainstream related dbs
+    set_of_uris = set()
+    for i in res_list:
+        set_of_uris.update(mainstream_uris_db(i))
+        print 'artist {} associated uris collected'.format(i)
+        print 'total uri length', len(set_of_uris)

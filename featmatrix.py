@@ -18,11 +18,13 @@ def clean_df(df):
     genre_dummy = df['genres'].str.get_dummies()
     df = pd.concat([df, genre_dummy], axis=1)
     for col in ['followers', 'popularity']:
-        df[col] = (df[col] - df[col].mean()) / (df[col].max() - df[col].min())
+        df[col] = df[col]/df[col].max()
+    df.drop_duplicates(subset='name', inplace=True)
+    df.reset_index(drop=True, inplace=True)
     return df
 
 def add_venues(df):
-    with open('uris_final_list.txt', 'r') as f:
+    with open('../pickle_jar/uris_final_list.txt', 'r') as f:
         upcoming_uris = pickle.load(f)
     null_genres = df['genres'].isnull()
     artist_venue = {}
@@ -38,28 +40,52 @@ def add_venues(df):
 def more_features(df):
     venue_dummy = df['venue'].str.get_dummies()
     dfnew = pd.concat([df, venue_dummy], axis=1)
-    dfnew.drop('venue', axis=1, inplace=True)
+    # dfnew.drop('venue', axis=1, inplace=True)
     return dfnew
 
 def dist_matrix(df):
+    df2 = df.copy()
+    live_only = df2.loc[df2['venue'].notnull(), :]
     name = df.pop('name')
     uri = df.pop('uri')
+    venue = df.pop('venue')
     data = df
     dist = pdist(df, 'cosine')
-    dist_df = pd.DataFrame(squareform(dist), index=df.index, columns = df.index)
-    name_uri_df = pd.concat([name, uri], axis=1)
-    return dist_df, name_uri_df
+    master = pd.DataFrame(squareform(dist), index=df.index, columns = df.index)
+    #master = pd.concat([dist_df, name, uri, venue], axis=1)
+    return master
+
+def top_ten(master,df):
+    top10_performing = {}
+    live_only = df.loc[df2['venue'].notnull(), :]
+    #for index, row in master.iterrows():
+    for i in master.columns:
+        band = master.loc[i, :]
+        mask = np.in1d(np.argsort(band.values), live_only.index)
+        top_ten = np.argsort(band.values)[mask][:10]
+        top10_performing[df2.loc[i, 'uri']] = top_ten
+    return top10_performing
 
 # def same_bill(df):
 #     df['same_bill'] = if artist are performing for same show
 
 if __name__ == '__main__':
-    df = (pd.DataFrame(list(tab.find()))).ix[3:]
-    dfnew = clean_df(df.reset_index())
+    df = (pd.DataFrame(list(tab.find())))
+    dfnew = clean_df(df)
+    print dfnew.columns
+    print dfnew.head(5)
     df2, venues = add_venues(dfnew)
     df_final = more_features(df2)
-    dist_mat, name_uri_df = dist_matrix(df_final)
-    with open('dist_mat.txt', 'w') as f:
-        pickle.dump(dist_mat, f)
-    with open('name_uri_df.txt', 'w') as f:
-        pickle.dump(name_uri_df, f)
+    df_final2 = df_final.copy()
+    master = dist_matrix(df_final)
+    #top10_performing = top_ten(master, df_final2)
+
+
+    # with open('../pickle_jar/top20_performing.txt', 'w') as f:
+    #     pickle.dump(top20_performing, f)
+    # with open('../pickle_jar/df_final.txt', 'w') as f:
+    #     pickle.dump(df_final, f)
+    # with open('dist_mat.txt', 'w') as f:
+    #     pickle.dump(dist_mat, f)
+    # with open('name_uri_df.txt', 'w') as f:
+    #     pickle.dump(name_uri_df, f)

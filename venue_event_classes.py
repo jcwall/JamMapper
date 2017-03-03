@@ -49,15 +49,18 @@ class Events():
             page = api.call('events/search', l=self.id, page_number=p)
             for i in page['events']['event']:
                 #shows[i['title']] = i['id']
-                shows.append((i['title'], i['id']))
+                shows.append((i['title'].encode('utf-8'), i['id']))
         return shows
 
 if __name__ == '__main__':
     # venues_count = int(api.call('/venues/search', q='music', l='denver')['page_count'])
     names_ids_dict = venue_data()
+    names_ids_dict2
     shows_master_list = []
     for venue, i in names_ids_dict.iteritems():
         v = Events(i)
         shows_master_list.append((venue, v.get_events()))
     with open('shows_master_list.txt', 'w') as f:
         pickle.dump(shows_master_list, f)
+
+    ##--- VENUES TO ADD: 1stbank center, paramount theatre, swallow hill music, grizzly rose, hi-dive, mishawaka, pepsi center
