@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<div class="wrapper">
+<link rel='stylesheet' media='screen' href="{{ url_for('static', filename='bootstrap.min.css')}}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico"> <!--this is bullshit-->
+
+    <title>{{ title }}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../static/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="navbar-fixed-top.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../static/assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">JamMapper</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="https://github.com/jcwall/JamMapper">Github</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CO Venues <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                  <li class="dropdown-header">Denver</li>
+                  <li><a href="venues/V0-001-001417416-1">Red Rocks</a></li>
+                  <li><a href="venues/V0-001-001308294-2">Fillmore Auditorium</a></li>
+                  <li><a href="venues/V0-001-000164037-2">Cervantes</a></li>
+                  <li><a href="venues/V0-001-001524792-3">Bluebird Theater</a></li>
+                  <li><a href="venues/V0-001-000198697-3">Paramount Theatre</a></li>
+                  <li><a href="venues/V0-001-000164037-2">Cervantes</a></li>
+                  <li><a href="venues/V0-001-008853052-6">Ophelia's Electric Soapbox</a></li>
+                  <li><a href="venues/V0-001-001154846-2">The Ogden Theater</a></li>
+                  <li><a href="venues/V0-001-000339274-3">Dazzle Jazz Restaurant and Lounge</a></li>
+                  <li><a href="venues/V0-001-000212352-6">Jazz @ Jack's</a></li>
+                  <li><a href="venues/V0-001-000216537-3">Beta Nightclub</a></li>
+                  <li><a href="venues/V0-001-001711423-0">Larimer Lounge</a></li>
+                  <li><a href="venues/V0-001-000362189-4">1stBANK Center</a></li>
+                  <li><a href="venues/V0-001-001131295-5">Swallow Hill</a></li>
+                  <li><a href="venues/V0-001-000105138-3">Pepsi Center</a></li>
+                  <li><a href="venues/V0-001-000268840-3">Grizzly Rose</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li class="dropdown-header">Boulder</li>
+                  <li><a href="venues/V0-001-000164037-2">The Fox Theatre</a></li>
+                  <li><a href="venues/V0-001-001461242-1">Boulder Theater</a></li>
+                  <li><a href="venues/V0-001-001224313-9">Macky Auditorium</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li class="dropdown-header">Aspen</li>
+                  <li><a href="venues/V0-001-001496614-6">Belly Up</a></li>
+              </ul>
+            </li>
+            <form action="/recs" method="POST" class="navbar-form navbar-left">
+  	        <div class="form-group">
+  	          <input type="text" name="user_input" class="form-control" placeholder="Search Artist" />
+              <!--input type="submit" value="Search Artist"/-->
+  	        </div>
+  	        <button type="submit" class="btn btn-default">Submit</button>
+  	      </form>
+          <li><a href="/careers">Careers</a></li>
+          </ul>
+          <!--ul class="nav navbar-nav navbar-right">
+            <li><a href="../navbar/">Default</a></li>
+            <li><a href="../navbar-static-top/">Static top</a></li>
+            <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
+          </ul>
+        </div><!-/.nav-collapse -->
+      </div>
+
+    </nav>
+
+    <div class="container" style="background-image: url('https://i.ytimg.com/vi/9B1vJpOn1so/maxresdefault.jpg');">
+
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h1>A Brief History</h1>
+        <p>Under development for years in a top-secret lab in Denver, CO-- JamMapper, with contributions from some of the top think-tanks in the world, launched in March of 2017.</p>
+        <!--p>
+          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
+      </p-->
+    </div>
+
+    <div class="container">
+
+        <img src="https://i.ytimg.com/vi/9B1vJpOn1so/maxresdefault.jpg" class="img-responsive" alt="Cinque Terre">
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../static/assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../static/dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../static/assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</div><!--end wrapper fullwidth-->
+</html>
