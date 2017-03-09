@@ -15,7 +15,28 @@ Furthermore, shows are a nuisance to research because you have to manually look 
 ### But Why Male Models?
 
 JamMapper provides a platform for live music lovers to discover upcoming shows that fit their exact request. About a month ago Santana was announced at Red Rocks, an amazing venue in Colorado. My Dad has been listening to Santana for decades and I was quickly indoctrinated to the Latin rock god's jams as a young boy. However, the upcoming show sold out within minutes and we were out of luck. Using JamMapper, I was able search for recommendations based on Santana on the spot.
-![](/screenshots/title.htm) 
+
+![](/screenshots/title_santana)
+
+![](/screenshots/recs_santana)
+
+![](/screenshots/tom_petty)
+
+![](/screenshots/red_rocks)
+
+As you can see from the screenshots above, JamMapper allows you to go from an initial artist request to recommendations, event information and finally venue information. This can be of incredible value for fans who are really captivated by a certain sector of a local scene, i.e. a subset of EDM in the local Denver scene.
+
+### Work Flow
+
+JamMapper was created through the following workflow:
+
+![](/screenshots/"Tech Stack")
+
+Broken down, I used the Spotify and Eventful APIs to build a database of over 20,000 artists including all the upcoming live acts in select venues. This database was built over a couple days using mongoDB, and then filtered through the scikit-learn library in Python, before finally being pickled and formatted for output on an Amazon Web Services instance using Flask. Python was the underlying framework for all the ancillary services and can be found in the backend folder. 
+
+### Summary
+
+The above framework illustrates the process from concept to creation of JamMapper. Special thanks goes to my fearless scrum master Erich Wellinger and Galvanize classmate/HTML whisperer Steve Iannaccone.
 
 ### TL;DR Just give me the website
 [JamMapper](http://ec2-54-174-141-180.compute-1.amazonaws.com:8105/)
