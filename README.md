@@ -1,4 +1,4 @@
-# JamMapper
+# [JamMapper](http://ec2-54-174-141-180.compute-1.amazonaws.com:8105/)
 
 Discover live music recommendations in your area! A recommendation engine embedded in a web app, JamMapper provides the latest upcoming shows in Denver, Boulder and Aspen.
 
