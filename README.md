@@ -22,9 +22,7 @@ JamMapper provides a platform for live music lovers to discover upcoming shows t
 
 ![](/screenshots/tom_petty.png)
 
-![](screenshots/red_rocks?raw=true.png)
-
-![](/screenshots/red_rocks.png?raw=true)
+![](/screenshots/red_rocks.png)
 
 As you can see from the screenshots above, JamMapper allows you to go from an initial artist request to recommendations, event information and finally venue information. This can be of incredible value for fans who are really captivated by a certain sector of a local scene, i.e. a subset of EDM in the local Denver scene.
 
@@ -32,7 +30,7 @@ As you can see from the screenshots above, JamMapper allows you to go from an in
 
 JamMapper was created through the following workflow:
 
-![](/screenshots/"Tech Stack".png)
+![](/screenshots/tech.png)
 
 Broken down, I used the Spotify and Eventful APIs to build a database of over 20,000 artists including all the upcoming live acts in select venues. This database was built over a couple days using mongoDB, and then filtered through the scikit-learn library in Python, before finally being pickled and formatted for output on an Amazon Web Services instance using Flask. Python was the underlying framework for all the ancillary services and the scripts can be found in the backend folder.
 
