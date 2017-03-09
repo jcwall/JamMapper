@@ -24,6 +24,8 @@ JamMapper provides a platform for live music lovers to discover upcoming shows t
 
 ![](https://github.com/jcwall/JamMapper/blob/master/screenshots/red_rocks?raw=true)
 
+![text](https://github.com/jcwall/JamMapper/blob/master/screenshots/red_rocks?raw=true)
+
 As you can see from the screenshots above, JamMapper allows you to go from an initial artist request to recommendations, event information and finally venue information. This can be of incredible value for fans who are really captivated by a certain sector of a local scene, i.e. a subset of EDM in the local Denver scene.
 
 ### Work Flow
