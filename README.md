@@ -16,7 +16,7 @@ Furthermore, shows are a nuisance to research because you have to manually look 
 
 JamMapper provides a platform for live music lovers to discover upcoming shows that fit their exact request. About a month ago Santana was announced at Red Rocks, an amazing venue in Colorado. My Dad has been listening to Santana for decades and I was quickly indoctrinated to the Latin rock god's jams as a young boy. However, the upcoming show sold out within minutes and we were out of luck. Using JamMapper, I was able search for recommendations based on Santana on the spot.
 
-![](/screenshots/title_santana)
+![](/screenshots/title_santana.png)
 
 ![](/screenshots/recs_santana)
 
@@ -24,7 +24,7 @@ JamMapper provides a platform for live music lovers to discover upcoming shows t
 
 ![](https://github.com/jcwall/JamMapper/blob/master/screenshots/red_rocks?raw=true)
 
-![text](https://github.com/jcwall/JamMapper/blob/master/screenshots/red_rocks?raw=true)
+![text](https://github.com/jcwall/JamMapper/blob/master/screenshots/red_rocks.png?raw=true)
 
 As you can see from the screenshots above, JamMapper allows you to go from an initial artist request to recommendations, event information and finally venue information. This can be of incredible value for fans who are really captivated by a certain sector of a local scene, i.e. a subset of EDM in the local Denver scene.
 
