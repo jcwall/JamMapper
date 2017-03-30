@@ -24,7 +24,7 @@ def clean_df(df):
     return df
 
 def add_venues(df):
-    with open('../pickle_jar/uris_final_list.txt', 'r') as f:
+    with open('../pickle_jar/uris_master_list1.pkl', 'r') as f:
         upcoming_uris = pickle.load(f)
     null_genres = df['genres'].isnull()
     artist_venue = {}
@@ -49,7 +49,7 @@ def dist_matrix(df):
     name = df.pop('name')
     uri = df.pop('uri')
     venue = df.pop('venue')
-    data = df
+    #data = df
     dist = pdist(df, 'cosine')
     master = pd.DataFrame(squareform(dist), index=df.index, columns = df.index)
     #master = pd.concat([dist_df, name, uri, venue], axis=1)
@@ -63,29 +63,16 @@ def top_ten(master,df):
         band = master.loc[i, :]
         mask = np.in1d(np.argsort(band.values), live_only.index)
         top_ten = np.argsort(band.values)[mask][:10]
-        top10_performing[df2.loc[i, 'uri']] = top_ten
+        top10_performing[df2.loc[i, 'name']] = [df2.loc[i, 'uri'] for i in top_ten]
     return top10_performing
-
-# def same_bill(df):
-#     df['same_bill'] = if artist are performing for same show
 
 if __name__ == '__main__':
     df = (pd.DataFrame(list(tab.find())))
     dfnew = clean_df(df)
-    print dfnew.columns
-    print dfnew.head(5)
     df2, venues = add_venues(dfnew)
     df_final = more_features(df2)
     df_final2 = df_final.copy()
     master = dist_matrix(df_final)
-    #top10_performing = top_ten(master, df_final2)
-
-
-    # with open('../pickle_jar/top20_performing.txt', 'w') as f:
-    #     pickle.dump(top20_performing, f)
-    # with open('../pickle_jar/df_final.txt', 'w') as f:
-    #     pickle.dump(df_final, f)
-    # with open('dist_mat.txt', 'w') as f:
-    #     pickle.dump(dist_mat, f)
-    # with open('name_uri_df.txt', 'w') as f:
-    #     pickle.dump(name_uri_df, f)
+    name_uri_lib = top_ten(master, df_final2)
+    with open('../pickle_jar/names_uris_lib.pkl', 'w') as f:
+        pickle.dump(name_uri_lib, f)

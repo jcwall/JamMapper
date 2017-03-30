@@ -27,7 +27,7 @@ class Events():
             page = api.call('events/search', l=self.id, page_number=p)
             for i in page['events']['event']:
                 #shows[i['title']] = i['id']
-                shows.append((i['title'].encode('utf-8'), i['id']))
+                shows.append((i['title'].encode('utf-8'), i['id'], i['start_time']))
         return shows
 
 if __name__ == '__main__':

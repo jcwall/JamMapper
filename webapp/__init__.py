@@ -4,28 +4,31 @@ import os
 import eventful
 api = eventful.API(os.environ["EVENTFUL_ID"])
 import datetime
+from fuzzywuzzy import fuzz, process
 
 with open('../pickle_jar/names_uris_lib.pkl') as f:
     uri_dict = pickle.load(f)
-with open('../pickle_jar/uris_final_list.pkl') as f:
+with open('../pickle_jar/uris_master_list1.pkl') as f:
     events_list = pickle.load(f)
-with open('../pickle_jar/uris_final_list2.pkl') as f:
-    events_list2 = pickle.load(f)
+# with open('../pickle_jar/uris_final_list2.pkl') as f:
+#     events_list2 = pickle.load(f)
 with open('../pickle_jar/images2.pkl') as f:
     images = pickle.load(f)
-
-events_list.extend(events_list2)
+choices = uri_dict.keys()
+# events_list.extend(events_list2)
 
 app = Flask(__name__)
 
 def get_bands(text):
     bands = []
-    try:
-        for i in uri_dict[text][0]:
-            bands.append(i)
-    except (KeyError):
-        print 'pick a better name'
-    return bands
+    band = process.extract(text, choices, limit=1)[0][0]
+    # try:
+    #     for i in uri_dict[text][0]:
+    #         bands.append(i)
+    # except (KeyError):
+    #     print 'pick a better name'
+    # return bands
+    return uri_dict[band]
 
 def get_shows(rec_band, events_list=events_list):
     shows = []
@@ -82,6 +85,7 @@ def eventpage(activity_id):
     time, date = start[10:], start[:10]
     return render_template('event.html', title=event['title'], address=event['address'], venue=event['venue_name'], city=event['city'], region=event['region'], time=time, weekday=weekday.strftime("%A"), date=date, start=event['start_time'], venue_id=event['venue_id'], price=event['price'], photo=images[event['venue_id']])
 
+#turn this into a dictionary
 @app.route('/venues/<activity_id>', methods=['GET', 'POST'])
 def venuepage(activity_id):
     v = api.call('venues/get', id=activity_id.encode('utf-8'))

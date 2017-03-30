@@ -56,7 +56,7 @@ if __name__ == '__main__':
         print '---------venue {} starting----------'.format(venue[0])
         venue_list = []
         for show in venue[1]:
-            venue_list.append((get_uris(show[0]), show[0], show[1]))
+            venue_list.append((get_uris(show[0]), show[0], show[1], show[2]))
         print '---------venue {} ending-------------'.format(venue[0])
         uris_master_list.append((venue[0], venue_list))
     final_list = []
@@ -64,7 +64,7 @@ if __name__ == '__main__':
         print 'cleaning venue: {}'.format(venue[0])
         venue_list = []
         for show in venue[1]:
-            venue_list.append((clean_nones(show), show[1], show[2]))
+            venue_list.append((clean_nones(show), show[1], show[2], show[3]))
         final_list.append((venue[0], venue_list))
-    with open('uris_master_list1.pkl', 'r') as f:
+    with open('../pickle_jar/uris_master_list1.pkl', 'w') as f:
         pickle.dump(final_list, f)
