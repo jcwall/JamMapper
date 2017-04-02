@@ -55,24 +55,29 @@ def dist_matrix(df):
     #master = pd.concat([dist_df, name, uri, venue], axis=1)
     return master
 
-def top_ten(master,df):
+def top_ten(master,df2):
     top10_performing = {}
-    live_only = df.loc[df2['venue'].notnull(), :]
+    live_only = df2.loc[df2['venue'].notnull(), :]
     #for index, row in master.iterrows():
     for i in master.columns:
         band = master.loc[i, :]
-        mask = np.in1d(np.argsort(band.values), live_only.index)
-        top_ten = np.argsort(band.values)[mask][:10]
-        top10_performing[df2.loc[i, 'name']] = [df2.loc[i, 'uri'] for i in top_ten]
+        mask = np.in1d(band.index, live_only.index)
+        top_ten = band[mask].sort_values().index[:10]
+        top10_performing[df2.loc[i, 'name']] = [df2.loc[x, 'uri'] for x in top_ten]
+        print df2.loc[i, 'name']
     return top10_performing
 
 if __name__ == '__main__':
-    df = (pd.DataFrame(list(tab.find())))
-    dfnew = clean_df(df)
+    # df = (pd.DataFrame(list(tab.find())))
+    # dfnew = clean_df(df)
+    # with open('../pickle_jar/dfnew.pkl', 'w') as f:
+    #     pickle.dump(dfnew, f)
+    with open('../pickle_jar/dfnew.pkl', 'r') as f:
+        dfnew = pickle.load(f)
     df2, venues = add_venues(dfnew)
     df_final = more_features(df2)
     df_final2 = df_final.copy()
     master = dist_matrix(df_final)
-    name_uri_lib = top_ten(master, df_final2)
+    name_uri_lib = top_ten(master, df2)
     with open('../pickle_jar/names_uris_lib.pkl', 'w') as f:
         pickle.dump(name_uri_lib, f)

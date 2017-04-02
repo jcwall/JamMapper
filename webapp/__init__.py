@@ -10,8 +10,8 @@ with open('../pickle_jar/names_uris_lib.pkl') as f:
     uri_dict = pickle.load(f)
 with open('../pickle_jar/uris_master_list1.pkl') as f:
     events_list = pickle.load(f)
-# with open('../pickle_jar/uris_final_list2.pkl') as f:
-#     events_list2 = pickle.load(f)
+with open('../pickle_jar/shows_dict.pkl', 'r') as f:
+    shows_dict = pickle.load(f)
 with open('../pickle_jar/images2.pkl') as f:
     images = pickle.load(f)
 choices = uri_dict.keys()
@@ -20,22 +20,17 @@ choices = uri_dict.keys()
 app = Flask(__name__)
 
 def get_bands(text):
-    bands = []
     band = process.extract(text, choices, limit=1)[0][0]
-    # try:
-    #     for i in uri_dict[text][0]:
-    #         bands.append(i)
-    # except (KeyError):
-    #     print 'pick a better name'
-    # return bands
-    return uri_dict[band]
+    return uri_dict[band], band
 
 def get_shows(rec_band, events_list=events_list):
     shows = []
     for venue in events_list:
         for show in venue[1]:
-            if rec_band in show[0]:
-                shows.append((show[1].encode('utf-8'), venue[0], show[2]))
+            year, month, day = (int(d) for d in show[3][:10].split('-'))
+            time = datetime.datetime(year, month, day, 23)
+            if rec_band in show[0] and time > datetime.datetime.now():
+                shows.append((show[1], venue[0], show[2], show[3]))
     return list(set(shows))
 
 @app.route('/')
@@ -63,18 +58,22 @@ def recpage():
     if error:
         return render_template('recs.html')
     else:
-        shows = []
-        rec_bands = get_bands(text)
-        for rec in rec_bands:
-             s = get_shows(str(rec.encode('utf-8')))
-             shows.extend(s)
-        shows = set(shows)
-        titlelist = [show[0].encode('utf-8') for show in shows]
-        venuelist = [show[1].encode('utf-8') for show in shows]
-        idslist = [show[2].encode('utf-8') for show in shows]
-        l = zip(titlelist, venuelist, idslist)
-
-        return render_template('recs.html', shows=l)
+        try:
+            shows = []
+            rec_bands, band = get_bands(text)
+            for rec in rec_bands:
+                 s = get_shows(str(rec.encode('utf-8')))
+                 shows.extend(s)
+            shows = set(shows)
+            titlelist = [show[0].encode('utf-8') for show in shows]
+            venuelist = [show[1].encode('utf-8') for show in shows]
+            idslist = [show[2].encode('utf-8') for show in shows]
+            datelist = [show[3].encode('utf-8') for show in shows]
+            l = sorted(zip(titlelist, venuelist, idslist, datelist), key = lambda x: x[3])
+            return render_template('recs.html', shows=l, band=band)
+        except:
+            band = (text)
+            return render_template('recs.html', band=band)
 
 @app.route('/recs/event/<activity_id>', methods=['GET', 'POST'])
 def eventpage(activity_id):
@@ -85,25 +84,10 @@ def eventpage(activity_id):
     time, date = start[10:], start[:10]
     return render_template('event.html', title=event['title'], address=event['address'], venue=event['venue_name'], city=event['city'], region=event['region'], time=time, weekday=weekday.strftime("%A"), date=date, start=event['start_time'], venue_id=event['venue_id'], price=event['price'], photo=images[event['venue_id']])
 
-#turn this into a dictionary
 @app.route('/venues/<activity_id>', methods=['GET', 'POST'])
 def venuepage(activity_id):
     v = api.call('venues/get', id=activity_id.encode('utf-8'))
-    shows = []
-    for venue in events_list:
-        if venue[0] == v['name']:
-            shows.extend(venue[1])
-    events = [event[2] for event in shows]
-    dates, titles, prices, ids = [], [], [], []
-    for i, event in enumerate(events):
-        e = api.call('events/get', id=event.encode('utf-8'))
-        if e['title'] not in titles and e['start_time'] not in dates:
-            dates.append(e['start_time'])
-            titles.append(e['title'])
-            prices.append(e['price'])
-            ids.append(event.encode('utf-8'))
-    dump = zip(dates,titles,prices,ids)
-    dumps = sorted(set(dump), key=lambda x: x[0])
+    dumps = shows_dict[v['name']]
     return render_template('venues.html', name=v['name'], dump=dumps)
 
 

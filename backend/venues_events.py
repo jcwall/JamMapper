@@ -31,7 +31,7 @@ class Events():
         return shows
 
 if __name__ == '__main__':
-    names_ids_dict = {'Belly Up': 'V0-001-001496614-6',
+    names_ids_dict = {'Belly Up Aspen': 'V0-001-001496614-6',
     'Beta': 'V0-001-000216537-3',
     'Boulder Theater': 'V0-001-001461242-1',
     'Cervantes Masterpiece Ballroom': 'V0-001-000458762-1',
@@ -44,7 +44,7 @@ if __name__ == '__main__':
     'Red Rocks Amphitheatre': 'V0-001-001417416-1',
     'The Bluebird Theater': 'V0-001-001524792-3',
     'The Fillmore Auditorium': 'V0-001-001308294-2',
-    'The Fox Theatre': 'V0-001-000164037-2','1stbank':'V0-001-000362189-4', 'Pepsi Center':'V0-001-000105138-3', 'Grizzly Rose':'V0-001-000268840-3', 'Swallow Hill':'V0-001-001131295-5', 'Hi-dive':'V0-001-000170025-8', 'Paramount Theatre':'V0-001-000198697-3'}
+    'The Fox Theatre': 'V0-001-000164037-2','1st Bank Center':'V0-001-000362189-4', 'Pepsi Center':'V0-001-000105138-3', 'Grizzly Rose Saloon and Dance Emporium':'V0-001-000268840-3', 'Swallow Hill Music Hall':'V0-001-001131295-5', 'Hi-Dive':'V0-001-000170025-8', 'Paramount Theatre':'V0-001-000198697-3'}
     shows_master_list = []
     for venue, i in names_ids_dict.iteritems():
         e = Events(i)
